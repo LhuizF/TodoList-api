@@ -8,10 +8,10 @@ namespace todoList.Repositorys
 	public class UserRepository : IUserRepository
 	{
 		private readonly TodoListContex _dbContext;
-    public UserRepository(TodoListContex todoListContext)
-    {
-      _dbContext = todoListContext;
-    }
+		public UserRepository(TodoListContex todoListContext)
+		{
+			_dbContext = todoListContext;
+		}
 		public async Task<List<UserModel>> FindAllUser()
 		{
 			return await _dbContext.Users.ToListAsync();
@@ -24,7 +24,7 @@ namespace todoList.Repositorys
 
 		public async Task<UserModel> InsertNewUser(UserModel user)
 		{
-			await	_dbContext.Users.AddAsync(user);
+			await _dbContext.Users.AddAsync(user);
 			await _dbContext.SaveChangesAsync();
 
 			return user;
@@ -34,13 +34,20 @@ namespace todoList.Repositorys
 		{
 			UserModel currentUser = await FindById(id) ?? throw new Exception($"Usuário id:{id} não encontrado");
 
-			currentUser.Name = user.Name;
-			currentUser.Email = user.Email;
+			if (user.Name != null)
+			{
+				currentUser.Name = user.Name;
+			}
+
+			if (user.Email != null)
+			{
+				currentUser.Email = user.Email;
+			}
 
 			_dbContext.Update(currentUser);
 			await _dbContext.SaveChangesAsync();
 
-			return user;
+			return currentUser;
 		}
 
 		public async Task<bool> DeleteUser(int id)
