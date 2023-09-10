@@ -59,5 +59,18 @@ namespace todoList.Repositorys
 
 			return true;
 		}
+
+		public async Task<UserTasksModel> FindUserTask(int id)
+		{
+			UserModel user = await FindById(id) ?? throw new Exception("Usuario não encontrado");
+			List<TaskModel> tasks = _dbContext.Tasks.Where(x => x.Id == user.Id).ToList();
+
+			UserTasksModel userTasks = new UserTasksModel(user)
+			{
+				tasks = tasks
+			};
+
+			return userTasks;
+		}
 	}
 }

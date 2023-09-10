@@ -49,5 +49,14 @@ namespace todoList.Controllers
 			bool isDelete = await _userRepository.DeleteUser(id);
 			return Ok(isDelete);
 		}
+
+		[HttpGet("{id}/tasks")]
+		public async Task<ActionResult<UserModel>> FindAllUserTasks(int id)
+		{
+
+			var userTasks = await _userRepository.FindUserTask(id);
+
+			return Ok(userTasks);
+		}
 	}
 }

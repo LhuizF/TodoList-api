@@ -9,5 +9,6 @@ namespace todoList.Repositorys.Interfaces
 		Task<UserModel> InsertNewUser(UserModel user);
 		Task<UserModel> UpdateUser(int id, UserModel user);
 		Task<bool> DeleteUser(int id);
+		Task<UserTasksModel> FindUserTask(int id);
 	}
 }

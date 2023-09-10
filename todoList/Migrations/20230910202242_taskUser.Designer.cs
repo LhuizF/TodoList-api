@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using todoList.Data;
 
@@ -11,9 +12,10 @@ using todoList.Data;
 namespace todoList.Migrations
 {
     [DbContext(typeof(TodoListContex))]
-    partial class TodoListContexModelSnapshot : ModelSnapshot
+    [Migration("20230910202242_taskUser")]
+    partial class taskUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
